@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Script Hub - Scripts Premium</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            background: #0a0f1c;
+            color: #e2e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Partículas de fundo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #3b82f6;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Background animado */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(29, 78, 216, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Language Selector - CORRIGIDO */
+        .language-selector {
+            position: fixed !important;
+            top: 20px !important;
+            right: 20px !important;
+            z-index: 9999 !important;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.9)) !important;
+            border: 2px solid rgba(59, 130, 246, 0.8) !important;
+            border-radius: 15px;
+            padding: 15px 20px;
+            backdrop-filter: blur(15px);
+            display: flex !important;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.3) !important;
+            min-width: 180px;
+        }
+
+        .language-selector:hover {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6) !important;
+            transform: translateY(-2px);
+        }
+
+        .language-selector select {
+            background: rgba(59, 130, 246, 0.3) !important;
+            border: 1px solid rgba(59, 130, 246, 0.5) !important;
+            color: #ffffff !important;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .language-selector select:hover {
+            background: rgba(59, 130, 246, 0.5) !important;
+            border-color: #3b82f6 !important;
+        }
+
+        .language-selector select option {
+            background: #1e293b !important;
+            color: #e2e8f0 !important;
+            padding: 10px;
+        }
+
+        .language-icon {
+            font-size: 20px;
+            animation: pulse 2s infinite;
+            color: #3b82f6;
+        }
+
+        .language-label {
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+            }
+            to {
+                filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.6));
+            }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search Container */
+        .search-container {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.6));
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            padding: 5px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-wrapper:hover,
+        .search-wrapper:focus-within {
+            border-color: #3b82f6;
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 20px 60px 20px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 15px;
+            background: transparent;
+            color: #e2e8f0;
+            outline: none;
+            font-weight: 500;
+        }
+
+        .search-input::placeholder {
+            color: #64748b;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3b82f6;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* Scripts Grid */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .script-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(51, 65, 85, 0.7));
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideInUp 0.6s ease-out both;
+        }
+
+        .script-card:nth-child(1) { animation-delay: 0.1s; }
+        .script-card:nth-child(2) { animation-delay: 0.2s; }
+        .script-card:nth-child(3) { animation-delay: 0.3s; }
+        .script-card:nth-child(4) { animation-delay: 0.4s; }
+        .script-card:nth-child(5) { animation-delay: 0.5s; }
+        .script-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .script-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #6366f1, #8b5cf6);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .script-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .script-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #3b82f6;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .script-card:hover::after {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .script-header {
+            display: block;
+            text-align: left;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .script-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #f1f5f9, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .script-category {
+            background: linear-gradient(45deg, #3b82f6, #6366f1);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .script-description {
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .script-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: #64748b;
+            position: relative;
+            z-index: 2;
+        }
+
+        .script-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .script-language {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .script-actions {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #2563eb, #1d4ed8);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(51, 65, 85, 0.8);
+            color: #94a3b8;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: #e2e8f0;
+            border-color: #3b82f6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.9));
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            backdrop-filter: blur(20px);
+            animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #3b82f6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        .code-container {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #6366f1, #8b5cf6);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .code-language {
+            color: #3b82f6;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .copy-code-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-code-btn:hover {
+            background: linear-gradient(45deg, #059669, #047857);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .code-content {
+            background: #000;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            display: none;
+            z-index: 1001;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            animation: toastSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes toastSlideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            color: #64748b;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .no-results h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #94a3b8;
+        }
+
+        .no-results p {
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(51, 65, 85, 0.3));
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .made-by {
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #3b82f6, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        .creator-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #3b82f6, #6366f1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #2563eb, #4f46e5);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .language-selector {
+                top: 10px !important;
+                right: 10px !important;
+                padding: 10px 15px !important;
+                min-width: 150px !important;
+            }
+
+            .language-selector select {
+                min-width: 100px !important;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .scripts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .script-card {
+                padding: 20px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 25px;
+            }
+            
+            .script-actions {
+                flex-direction: column;
+            }
+
+            .creator-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <span class="language-icon">🌐</span>
+        <span class="language-label">Idioma:</span>
+        <select id="languageSelect">
+            <option value="pt">🇧🇷 Português</option>
+            <option value="en">🇺🇸 English</option>
+        </select>
+    </div>
+
+    <!-- Partículas de fundo -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo" data-translate="title">ROBLOX SCRIPT HUB</h1>
+            <p class="subtitle" data-translate="subtitle">Os melhores scripts para Roblox - Testados e funcionais</p>
+            
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" id="searchInput" data-translate-placeholder="searchPlaceholder">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="scripts-grid" id="scriptsGrid">
+            <!-- Scripts serão inseridos aqui via JavaScript -->
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <h3 data-translate="noResultsTitle">Nenhum script encontrado</h3>
+            <p data-translate="noResultsText">Tente ajustar sua pesquisa</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="made-by">Made by</div>
+            <div class="creator-name">V4mpzzxx</div>
+        </div>
+    </footer>
+
+    <!-- Modal para visualizar script -->
+    <div class="modal" id="scriptModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast para feedback -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Sistema de tradução
+        const translations = {
+            pt: {
+                title: "ROBLOX SCRIPT HUB",
+                subtitle: "Os melhores scripts para Roblox - Testados e funcionais",
+                searchPlaceholder: "Pesquisar scripts de Roblox...",
+                noResultsTitle: "Nenhum script encontrado",
+                noResultsText: "Tente ajustar sua pesquisa",
+                viewScript: "Ver Script",
+                copyScript: "Copiar",
+                category: "Categoria",
+                author: "Autor",
+                downloads: "Downloads",
+                rating: "Avaliação",
+                copyCode: "Copiar Código",
+                scriptCopied: "🎉 Script copiado para a área de transferência!",
+                codeCopied: "✅ Código copiado com sucesso!",
+                copyError: "❌ Erro ao copiar",
+                luaScript: "Script Lua"
+            },
+            en: {
+                title: "ROBLOX SCRIPT HUB",
+                subtitle: "The best Roblox scripts - Tested and functional",
+                searchPlaceholder: "Search Roblox scripts...",
+                noResultsTitle: "No scripts found",
+                noResultsText: "Try adjusting your search",
+                viewScript: "View Script",
+                copyScript: "Copy",
+                category: "Category",
+                author: "Author",
+                downloads: "Downloads",
+                rating: "Rating",
+                copyCode: "Copy Code",
+                scriptCopied: "🎉 Script copied to clipboard!",
+                codeCopied: "✅ Code copied successfully!",
+                copyError: "❌ Copy error",
+                luaScript: "Lua Script"
+            }
+        };
+
+        // Scripts com traduções
+        const scripts = [
+            {
+                id: 1,
+                title: {
+                    pt: "Infinite Yield",
+                    en: "Infinite Yield"
+                },
+                description: {
+                    pt: "Admin script completo com mais de 400 comandos para controle total do jogo",
+                    en: "Complete admin script with over 400 commands for total game control"
+                },
+                category: {
+                    pt: "Admin",
+                    en: "Admin"
+                },
+                author: "EdgeIY",
+                downloads: 15420,
+                rating: 4.9,
+                code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+
+-- Infinite Yield Admin Script
+-- Main commands:
+-- ;fly - Fly
+-- ;noclip - Walk through walls  
+-- ;speed [number] - Change speed
+-- ;jump [number] - Change jump height
+-- ;god - God mode
+-- ;ungod - Disable god mode
+-- ;invisible - Become invisible
+-- ;visible - Become visible
+-- ;tp [player] - Teleport to player
+-- ;bring [player] - Bring player
+-- ;kill [player] - Kill player
+-- ;kick [player] - Kick player
+-- ;ban [player] - Ban player
+-- ;unban [player] - Unban player
+-- ;shutdown - Shutdown server
+-- ;music [id] - Play music
+-- ;stopmusic - Stop music
+-- ;btools - Building tools
+-- ;f3x - F3X tools
+-- ;dex - Dark Dex Explorer
+-- ;rconsole - Remote console
+-- ;rejoin - Rejoin game
+-- ;serverhop - Server hop
+-- ;lowgfx - Low graphics
+-- ;fullbright - Full brightness
+-- ;ambient [r] [g] [b] - Change ambient color
+-- ;day - Make day
+-- ;night - Make night
+-- ;rain - Make rain
+-- ;snow - Make snow
+-- ;clear - Clear weather
+-- ;fogend [number] - Change fog
+-- ;grav [number] - Change gravity
+-- ;hipheight [number] - Change hip height
+-- ;ws [number] - Change walkspeed
+-- ;jp [number] - Change jump power
+-- ;size [number] - Change character size
+
+print("Infinite Yield loaded successfully!")
+print("Type ;cmds to see all available commands")`
+            },
+            {
+                id: 2,
+                title: {
+                    pt: "ESP Universal",
+                    en: "Universal ESP"
+                },
+                description: {
+                    pt: "ESP avançado que funciona em todos os jogos, mostra jogadores através das paredes",
+                    en: "Advanced ESP that works in all games, shows players through walls"
+                },
+                category: {
+                    pt: "Visual",
+                    en: "Visual"
+                },
+                author: "ic3w0lf22",
+                downloads: 8930,
+                rating: 4.7,
+                code: `-- Universal ESP Script
+-- Works in any Roblox game
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+local ESPEnabled = true
+local ShowDistance = true
+local ShowHealth = true
+local ShowName = true
+local ESPColor = Color3.fromRGB(255, 0, 0)
+
+local ESPObjects = {}
+
+-- Function to create ESP
+local function CreateESP(player)
+    if player == LocalPlayer then return end
+    
+    local ESPFolder = Instance.new("Folder")
+    ESPFolder.Name = "ESP_" .. player.Name
+    ESPFolder.Parent = workspace
+    
+    local function UpdateESP()
+        if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+            return
+        end
+        
+        local character = player.Character
+        local humanoidRootPart = character.HumanoidRootPart
+        local humanoid = character:FindFirstChild("Humanoid")
+        
+        -- Clear previous ESP
+        ESPFolder:ClearAllChildren()
+        
+        if not ESPEnabled then return end
+        
+        -- Create highlight
+        local highlight = Instance.new("Highlight")
+        highlight.Parent = character
+        highlight.FillColor = ESPColor
+        highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+        highlight.FillTransparency = 0.5
+        highlight.OutlineTransparency = 0
+        
+        -- Create BillboardGui for information
+        local billboardGui = Instance.new("BillboardGui")
+        billboardGui.Parent = ESPFolder
+        billboardGui.Adornee = humanoidRootPart
+        billboardGui.Size = UDim2.new(0, 200, 0, 100)
+        billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+        billboardGui.AlwaysOnTop = true
+        
+        local frame = Instance.new("Frame")
+        frame.Parent = billboardGui
+        frame.Size = UDim2.new(1, 0, 1, 0)
+        frame.BackgroundTransparency = 1
+        
+        local yOffset = 0
+        
+        -- Player name
+        if ShowName then
+            local nameLabel = Instance.new("TextLabel")
+            nameLabel.Parent = frame
+            nameLabel.Size = UDim2.new(1, 0, 0, 20)
+            nameLabel.Position = UDim2.new(0, 0, 0, yOffset)
+            nameLabel.BackgroundTransparency = 1
+            nameLabel.Text = player.Name
+            nameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            nameLabel.TextStrokeTransparency = 0
+            nameLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+            nameLabel.Font = Enum.Font.SourceSansBold
+            nameLabel.TextSize = 14
+            yOffset = yOffset + 20
+        end
+        
+        -- Player health
+        if ShowHealth and humanoid then
+            local healthLabel = Instance.new("TextLabel")
+            healthLabel.Parent = frame
+            healthLabel.Size = UDim2.new(1, 0, 0, 20)
+            healthLabel.Position = UDim2.new(0, 0, 0, yOffset)
+            healthLabel.BackgroundTransparency = 1
+            healthLabel.Text = "HP: " .. math.floor(humanoid.Health) .. "/" .. math.floor(humanoid.MaxHealth)
+            healthLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+            healthLabel.TextStrokeTransparency = 0
+            healthLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+            healthLabel.Font = Enum.Font.SourceSans
+            healthLabel.TextSize = 12
+            yOffset = yOffset + 20
+        end
+        
+        -- Distance
+        if ShowDistance then
+            local distanceLabel = Instance.new("TextLabel")
+            distanceLabel.Parent = frame
+            distanceLabel.Size = UDim2.new(1, 0, 0, 20)
+            distanceLabel.Position = UDim2.new(0, 0, 0, yOffset)
+            distanceLabel.BackgroundTransparency = 1
+            distanceLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
+            distanceLabel.TextStrokeTransparency = 0
+            distanceLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+            distanceLabel.Font = Enum.Font.SourceSans
+            distanceLabel.TextSize = 12
+            
+            -- Update distance continuously
+            local connection
+            connection = RunService.Heartbeat:Connect(function()
+                if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    local distance = (LocalPlayer.Character.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude
+                    distanceLabel.Text = "Dist: " .. math.floor(distance) .. " studs"
+                else
+                    connection:Disconnect()
+                end
+            end)
+        end
+    end
+    
+    -- Update ESP when character spawns
+    local function OnCharacterAdded(character)
+        character:WaitForChild("HumanoidRootPart")
+        wait(0.1)
+        UpdateESP()
+    end
+    
+    if player.Character then
+        OnCharacterAdded(player.Character)
+    end
+    
+    player.CharacterAdded:Connect(OnCharacterAdded)
+    
+    ESPObjects[player] = {
+        Folder = ESPFolder,
+        Update = UpdateESP
+    }
+end
+
+-- Create ESP for existing players
+for _, player in pairs(Players:GetPlayers()) do
+    CreateESP(player)
+end
+
+-- Create ESP for new players
+Players.PlayerAdded:Connect(CreateESP)
+
+-- Remove ESP when player leaves
+Players.PlayerRemoving:Connect(function(player)
+    if ESPObjects[player] then
+        ESPObjects[player].Folder:Destroy()
+        ESPObjects[player] = nil
+    end
+end)
+
+-- Toggle ESP with key
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    
+    if input.KeyCode == Enum.KeyCode.E then
+        ESPEnabled = not ESPEnabled
+        
+        for player, espData in pairs(ESPObjects) do
+            espData.Update()
+        end
+        
+        print("ESP " .. (ESPEnabled and "Enabled" or "Disabled"))
+    end
+end)
+
+print("Universal ESP loaded!")
+print("Press 'E' to toggle ESP")`
+            },
+            {
+                id: 3,
+                title: {
+                    pt: "Speed Hack Universal",
+                    en: "Universal Speed Hack"
+                },
+                description: {
+                    pt: "Aumenta a velocidade de movimento em qualquer jogo do Roblox",
+                    en: "Increases movement speed in any Roblox game"
+                },
+                category: {
+                    pt: "Movimento",
+                    en: "Movement"
+                },
+                author: "SpeedMaster",
+                downloads: 12750,
+                rating: 4.8,
+                code: `-- Universal Speed Hack
+-- Works in most Roblox games
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local defaultSpeed = 16
+local currentSpeed = defaultSpeed
+local speedMultiplier = 2
+
+-- GUI for speed control
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SpeedHackGUI"
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+local Frame = Instance.new("Frame")
+Frame.Parent = ScreenGui
+Frame.Size = UDim2.new(0, 200, 0, 150)
+Frame.Position = UDim2.new(0, 10, 0, 10)
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.BorderSizePixel = 0
+Frame.Active = true
+Frame.Draggable = true
+
+local Corner = Instance.new("UICorner")
+Corner.Parent = Frame
+Corner.CornerRadius = UDim.new(0, 10)
+
+local Title = Instance.new("TextLabel")
+Title.Parent = Frame
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "Speed Hack"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 16
+Title.Font = Enum.Font.SourceSansBold
+
+local SpeedLabel = Instance.new("TextLabel")
+SpeedLabel.Parent = Frame
+SpeedLabel.Size = UDim2.new(1, 0, 0, 25)
+SpeedLabel.Position = UDim2.new(0, 0, 0, 35)
+SpeedLabel.BackgroundTransparency = 1
+SpeedLabel.Text = "Speed: " .. currentSpeed
+SpeedLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+SpeedLabel.TextSize = 14
+SpeedLabel.Font = Enum.Font.SourceSans
+
+-- Function to apply speed
+local function ApplySpeed()
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        LocalPlayer.Character.Humanoid.WalkSpeed = currentSpeed
+        SpeedLabel.Text = "Speed: " .. currentSpeed
+    end
+end
+
+-- Function to increase speed
+local function IncreaseSpeed()
+    currentSpeed = currentSpeed + 5
+    if currentSpeed > 200 then
+        currentSpeed = 200
+    end
+    ApplySpeed()
+end
+
+-- Function to decrease speed
+local function DecreaseSpeed()
+    currentSpeed = currentSpeed - 5
+    if currentSpeed < 0 then
+        currentSpeed = 0
+    end
+    ApplySpeed()
+end
+
+-- Function to reset speed
+local function ResetSpeed()
+    currentSpeed = defaultSpeed
+    ApplySpeed()
+end
+
+-- Apply speed automatically when character spawns
+local function OnCharacterAdded(character)
+    character:WaitForChild("Humanoid")
+    wait(0.1)
+    ApplySpeed()
+end
+
+if LocalPlayer.Character then
+    OnCharacterAdded(LocalPlayer.Character)
+end
+
+LocalPlayer.CharacterAdded:Connect(OnCharacterAdded)
+
+-- Maintain constant speed
+RunService.Heartbeat:Connect(function()
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        if LocalPlayer.Character.Humanoid.WalkSpeed ~= currentSpeed then
+            LocalPlayer.Character.Humanoid.WalkSpeed = currentSpeed
+        end
+    end
+end)
+
+-- Keyboard controls
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    
+    if input.KeyCode == Enum.KeyCode.Equal then -- + key
+        IncreaseSpeed()
+    elseif input.KeyCode == Enum.KeyCode.Minus then -- - key
+        DecreaseSpeed()
+    elseif input.KeyCode == Enum.KeyCode.BackSlash then -- \\ key
+        ResetSpeed()
+    end
+end)
+
+print("Speed Hack loaded!")
+print("+ to increase speed")
+print("- to decrease speed")
+print("\\\\ to reset speed")`
+            },
+            {
+                id: 4,
+                title: {
+                    pt: "Script de Voo V3",
+                    en: "Fly Script V3"
+                },
+                description: {
+                    pt: "Script de voo avançado com controles suaves e velocidade ajustável",
+                    en: "Advanced fly script with smooth controls and adjustable speed"
+                },
+                category: {
+                    pt: "Movimento",
+                    en: "Movement"
+                },
+                author: "FlyMaster",
+                downloads: 9840,
+                rating: 4.6,
+                code: `-- Fly Script V3 - Advanced Controls
+-- WASD to move, Space to go up, Shift to go down
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+local flying = false
+local flySpeed = 50
+local bodyVelocity
+local bodyAngularVelocity
+
+-- Function to start flying
+local function StartFlying()
+    if not LocalPlayer.Character or not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        return
+    end
+    
+    local character = LocalPlayer.Character
+    local humanoidRootPart = character.HumanoidRootPart
+    local humanoid = character:FindFirstChild("Humanoid")
+    
+    flying = true
+    
+    -- Create BodyVelocity
+    bodyVelocity = Instance.new("BodyVelocity")
+    bodyVelocity.MaxForce = Vector3.new(4000, 4000, 4000)
+    bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+    bodyVelocity.Parent = humanoidRootPart
+    
+    -- Create BodyAngularVelocity
+    bodyAngularVelocity = Instance.new("BodyAngularVelocity")
+    bodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0)
+    bodyAngularVelocity.AngularVelocity = Vector3.new(0, 0, 0)
+    bodyAngularVelocity.Parent = humanoidRootPart
+    
+    -- Disable gravity
+    if humanoid then
+        humanoid.PlatformStand = true
+    end
+    
+    print("Flying enabled!")
+end
+
+-- Function to stop flying
+local function StopFlying()
+    flying = false
+    
+    if bodyVelocity then
+        bodyVelocity:Destroy()
+        bodyVelocity = nil
+    end
+    
+    if bodyAngularVelocity then
+        bodyAngularVelocity:Destroy()
+        bodyAngularVelocity = nil
+    end
+    
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        LocalPlayer.Character.Humanoid.PlatformStand = false
+    end
+    
+    print("Flying disabled!")
+end
+
+-- Function to toggle fly
+local function ToggleFly()
+    if flying then
+        StopFlying()
+    else
+        StartFlying()
+    end
+end
+
+-- Movement controls
+local keysPressed = {}
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    
+    if input.KeyCode == Enum.KeyCode.F then
+        ToggleFly()
+    else
+        keysPressed[input.KeyCode] = true
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input, gameProcessed)
+    keysPressed[input.KeyCode] = false
+end)
+
+-- Movement loop
+RunService.Heartbeat:Connect(function()
+    if not flying or not bodyVelocity or not LocalPlayer.Character then
+        return
+    end
+    
+    local camera = workspace.CurrentCamera
+    local humanoidRootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    
+    if not camera or not humanoidRootPart then return end
+    
+    local moveVector = Vector3.new(0, 0, 0)
+    
+    -- Horizontal movement based on camera
+    local cameraCFrame = camera.CFrame
+    local forwardVector = cameraCFrame.LookVector
+    local rightVector = cameraCFrame.RightVector
+    
+    if keysPressed[Enum.KeyCode.W] then
+        moveVector = moveVector + forwardVector
+    end
+    if keysPressed[Enum.KeyCode.S] then
+        moveVector = moveVector - forwardVector
+    end
+    if keysPressed[Enum.KeyCode.A] then
+        moveVector = moveVector - rightVector
+    end
+    if keysPressed[Enum.KeyCode.D] then
+        moveVector = moveVector + rightVector
+    end
+    
+    -- Vertical movement
+    if keysPressed[Enum.KeyCode.Space] then
+        moveVector = moveVector + Vector3.new(0, 1, 0)
+    end
+    if keysPressed[Enum.KeyCode.LeftShift] then
+        moveVector = moveVector + Vector3.new(0, -1, 0)
+    end
+    
+    -- Apply velocity
+    if moveVector.Magnitude > 0 then
+        moveVector = moveVector.Unit * flySpeed
+    end
+    
+    bodyVelocity.Velocity = moveVector
+end)
+
+-- Stop flying when character dies
+LocalPlayer.CharacterAdded:Connect(function()
+    if flying then
+        StopFlying()
+    end
+end)
+
+print("Fly Script V3 loaded!")
+print("Press F to toggle flying")
+print("Use WASD to move, Space to go up, Shift to go down")`
+            },
+            {
+                id: 5,
+                title: {
+                    pt: "Aimbot Universal",
+                    en: "Universal Aimbot"
+                },
+                description: {
+                    pt: "Aimbot avançado que funciona na maioria dos jogos FPS do Roblox",
+                    en: "Advanced aimbot that works in most Roblox FPS games"
+                },
+                category: {
+                    pt: "Combate",
+                    en: "Combat"
+                },
+                author: "AimAssist",
+                downloads: 7650,
+                rating: 4.5,
+                code: `-- Universal Aimbot for Roblox
+-- Works in most FPS games
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+-- Settings
+local AimbotEnabled = false
+local AimbotKey = Enum.KeyCode.E
+local AimPart = "Head" -- Head, HumanoidRootPart, UpperTorso
+local MaxDistance = 1000
+local FOV = 100
+local Smoothness = 0.5
+local PredictionEnabled = true
+local PredictionStrength = 0.1
+local WallCheck = true
+local TeamCheck = true
+
+-- Variables
+local Target = nil
+local Connection = nil
+
+-- Function to check if player is teammate
+local function IsTeammate(player)
+    if not TeamCheck then return false end
+    return LocalPlayer.Team and player.Team and LocalPlayer.Team == player.Team
+end
+
+-- Function to check if there's a wall between player and target
+local function HasWallBetween(startPos, endPos)
+    if not WallCheck then return false end
+    
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+    raycastParams.FilterDescendantsInstances = {LocalPlayer.Character}
+    
+    local raycastResult = workspace:Raycast(startPos, (endPos - startPos), raycastParams)
+    
+    if raycastResult then
+        local hit = raycastResult.Instance
+        return not hit.Parent:FindFirstChild("Humanoid")
+    end
+    
+    return false
+end
+
+-- Function to get closest target
+local function GetClosestTarget()
+    local closestPlayer = nil
+    local shortestDistance = math.huge
+    
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild(AimPart) then
+            if IsTeammate(player) then continue end
+            
+            local character = player.Character
+            local aimPart = character[AimPart]
+            
+            -- Calculate screen position
+            local screenPos, onScreen = Camera:WorldToScreenPoint(aimPart.Position)
+            
+            if onScreen then
+                -- Calculate distance from screen center
+                local mousePos = Vector2.new(Mouse.X, Mouse.Y)
+                local screenCenter = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+                local distance = (Vector2.new(screenPos.X, screenPos.Y) - screenCenter).Magnitude
+                
+                -- Check if within FOV
+                if distance <= FOV then
+                    -- Check 3D distance
+                    local distance3D = (LocalPlayer.Character.HumanoidRootPart.Position - aimPart.Position).Magnitude
+                    
+                    if distance3D <= MaxDistance then
+                        -- Check wall
+                        if not HasWallBetween(Camera.CFrame.Position, aimPart.Position) then
+                            if distance < shortestDistance then
+                                shortestDistance = distance
+                                closestPlayer = player
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    return closestPlayer
+end
+
+-- Function to calculate movement prediction
+local function PredictMovement(player)
+    if not PredictionEnabled or not player.Character then
+        return Vector3.new(0, 0, 0)
+    end
+    
+    local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
+    if not humanoidRootPart then return Vector3.new(0, 0, 0) end
+    
+    local velocity = humanoidRootPart.Velocity
+    return velocity * PredictionStrength
+end
+
+-- Main aimbot function
+local function AimbotLoop()
+    if not AimbotEnabled or not LocalPlayer.Character then return end
+    
+    Target = GetClosestTarget()
+    
+    if Target and Target.Character and Target.Character:FindFirstChild(AimPart) then
+        local aimPart = Target.Character[AimPart]
+        local targetPosition = aimPart.Position + PredictMovement(Target)
+        
+        -- Calculate screen position
+        local screenPos = Camera:WorldToScreenPoint(targetPosition)
+        local mousePos = Vector2.new(Mouse.X, Mouse.Y)
+        local targetPos = Vector2.new(screenPos.X, screenPos.Y)
+        
+        -- Apply smoothing
+        local deltaX = (targetPos.X - mousePos.X) * Smoothness
+        local deltaY = (targetPos.Y - mousePos.Y) * Smoothness
+        
+        -- Move mouse
+        mousemoverel(deltaX, deltaY)
+    end
+end
+
+-- Function to toggle aimbot
+local function ToggleAimbot()
+    AimbotEnabled = not AimbotEnabled
+    
+    if AimbotEnabled then
+        print("Aimbot enabled!")
+        Connection = RunService.Heartbeat:Connect(AimbotLoop)
+    else
+        print("Aimbot disabled!")
+        if Connection then
+            Connection:Disconnect()
+            Connection = nil
+        end
+        Target = nil
+    end
+end
+
+-- Connect events
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    
+    if input.KeyCode == AimbotKey then
+        ToggleAimbot()
+    end
+end)
+
+print("Universal Aimbot loaded!")
+print("Press 'E' to toggle aimbot")`
+            },
+            {
+                id: 6,
+                title: {
+                    pt: "Auto Farm Universal",
+                    en: "Universal Auto Farm"
+                },
+                description: {
+                    pt: "Script de farm automático que funciona em vários jogos populares do Roblox",
+                    en: "Automatic farm script that works in various popular Roblox games"
+                },
+                category: {
+                    pt: "Automação",
+                    en: "Automation"
+                },
+                author: "FarmBot",
+                downloads: 11200,
+                rating: 4.8,
+                code: `-- Universal Auto Farm
+-- Automatically detects game type and applies appropriate farming
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
+-- Settings
+local FarmEnabled = false
+local FarmSpeed = 0.5
+local AutoCollect = true
+local SafeMode = true
+local FarmRadius = 50
+
+-- Detect game type
+local GameType = "Unknown"
+local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+
+-- Game detection patterns
+local GamePatterns = {
+    ["Simulator"] = {"Simulator", "Tycoon", "Clicker"},
+    ["Obby"] = {"Obby", "Parkour", "Tower"},
+    ["Fighting"] = {"Fighting", "Combat", "Battle", "War"},
+    ["RPG"] = {"RPG", "Adventure", "Quest", "Dungeon"},
+    ["Racing"] = {"Racing", "Drive", "Car", "Speed"}
+}
+
+-- Detect game type
+for gameType, patterns in pairs(GamePatterns) do
+    for _, pattern in pairs(patterns) do
+        if string.find(GameName:lower(), pattern:lower()) then
+            GameType = gameType
+            break
+        end
+    end
+    if GameType ~= "Unknown" then break end
+end
+
+-- Farm functions specific to game types
+local FarmFunctions = {}
+
+-- Farm for Simulators
+FarmFunctions.Simulator = function()
+    -- Look for collectibles
+    local collectibles = {}
+    
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("Part") or obj:IsA("MeshPart") then
+            local name = obj.Name:lower()
+            if string.find(name, "coin") or string.find(name, "cash") or 
+               string.find(name, "money") or string.find(name, "gem") or
+               string.find(name, "crystal") or string.find(name, "orb") then
+                
+                local distance = (HumanoidRootPart.Position - obj.Position).Magnitude
+                if distance <= FarmRadius then
+                    table.insert(collectibles, obj)
+                end
+            end
+        end
+    end
+    
+    -- Collect items
+    for _, item in pairs(collectibles) do
+        if FarmEnabled and item.Parent then
+            local tweenInfo = TweenInfo.new(FarmSpeed, Enum.EasingStyle.Linear)
+            local tween = TweenService:Create(HumanoidRootPart, tweenInfo, {CFrame = item.CFrame})
+            tween:Play()
+            tween.Completed:Wait()
+            
+            -- Try to collect
+            if item.Parent then
+                firetouchinterest(HumanoidRootPart, item, 0)
+                firetouchinterest(HumanoidRootPart, item, 1)
+            end
+            
+            wait(0.1)
+        end
+    end
+end
+
+-- Universal Farm (fallback)
+FarmFunctions.Universal = function()
+    -- Look for any interactive object nearby
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("Part") and obj.CanTouch then
+            local distance = (HumanoidRootPart.Position - obj.Position).Magnitude
+            
+            if distance <= FarmRadius and FarmEnabled then
+                -- Move to object
+                local tweenInfo = TweenInfo.new(FarmSpeed, Enum.EasingStyle.Linear)
+                local tween = TweenService:Create(HumanoidRootPart, tweenInfo, {CFrame = obj.CFrame})
+                tween:Play()
+                tween.Completed:Wait()
+                
+                -- Try to interact
+                firetouchinterest(HumanoidRootPart, obj, 0)
+                firetouchinterest(HumanoidRootPart, obj, 1)
+                
+                wait(0.5)
+            end
+        end
+    end
+end
+
+-- Main farm function
+local function StartFarm()
+    spawn(function()
+        while FarmEnabled do
+            if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                HumanoidRootPart = LocalPlayer.Character.HumanoidRootPart
+                
+                -- Execute farm based on game type
+                if FarmFunctions[GameType] then
+                    FarmFunctions[GameType]()
+                else
+                    FarmFunctions.Universal()
+                end
+            end
+            
+            wait(1)
+        end
+    end)
+end
+
+-- Toggle Farm
+local function ToggleFarm()
+    FarmEnabled = not FarmEnabled
+    
+    if FarmEnabled then
+        print("Auto Farm enabled!")
+        StartFarm()
+    else
+        print("Auto Farm disabled!")
+    end
+end
+
+-- Keyboard control
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    
+    if input.KeyCode == Enum.KeyCode.F then
+        ToggleFarm()
+    end
+end)
+
+-- Auto-restart when character respawns
+LocalPlayer.CharacterAdded:Connect(function(newCharacter)
+    Character = newCharacter
+    HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+    
+    if FarmEnabled then
+        wait(2)
+        StartFarm()
+    end
+end)
+
+print("Universal Auto Farm loaded!")
+print("Game type detected: " .. GameType)
+print("Press F to toggle auto farm")`
+            }
+        ];
+
+        let currentLanguage = localStorage.getItem('robloxHubLanguage') || 'pt';
+        let filteredScripts = [...scripts];
+
+        // Função para traduzir textos
+        function translateText(key) {
+            return translations[currentLanguage][key] || key;
+        }
+
+        // Função para atualizar todos os textos da página
+        function updatePageLanguage() {
+            // Atualizar elementos com data-translate
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                element.textContent = translateText(key);
+            });
+
+            // Atualizar placeholder do input
+            const searchInput = document.getElementById('searchInput');
+            searchInput.placeholder = translateText('searchPlaceholder');
+
+            // Atualizar idioma do HTML
+            document.documentElement.lang = currentLanguage === 'pt' ? 'pt-BR' : 'en';
+
+            // Re-renderizar scripts com novo idioma
+            renderScripts(filteredScripts);
+        }
+
+        // Função para mudar idioma
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('robloxHubLanguage', lang);
+            updatePageLanguage();
+        }
+
+        // Criar partículas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            setInterval(() => {
+                if (particlesContainer.children.length < 50) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particlesContainer.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 6000);
+                }
+            }, 200);
+        }
+
+        // Renderizar scripts
+        function renderScripts(scriptsToRender) {
+            const grid = document.getElementById('scriptsGrid');
+            const noResults = document.getElementById('noResults');
+            
+            if (scriptsToRender.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            grid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            grid.innerHTML = scriptsToRender.map(script => `
+        <div class="script-card">
+            <div class="script-header">
+                <div>
+                    <h3 class="script-title">${script.title[currentLanguage]}</h3>
+                </div>
+            </div>
+            <p class="script-description">${script.description[currentLanguage]}</p>
+            <div class="script-actions">
+                <button class="btn btn-primary" onclick="viewScript(${script.id})">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    ${translateText('viewScript')}
+                </button>
+                <button class="btn btn-secondary" onclick="copyScript(${script.id})">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    ${translateText('copyScript')}
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+        // Pesquisar scripts
+        function searchScripts(query) {
+            const filtered = scripts.filter(script => {
+                return script.title[currentLanguage].toLowerCase().includes(query.toLowerCase()) ||
+                       script.description[currentLanguage].toLowerCase().includes(query.toLowerCase()) ||
+                       script.category[currentLanguage].toLowerCase().includes(query.toLowerCase());
+            });
+            
+            filteredScripts = filtered;
+            renderScripts(filtered);
+        }
+
+        // Visualizar script
+        function viewScript(id) {
+            const script = scripts.find(s => s.id === id);
+            if (!script) return;
+            
+            document.getElementById('modalTitle').textContent = script.title[currentLanguage];
+            document.getElementById('modalBody').innerHTML = `
+                <p style="color: #94a3b8; margin-bottom: 25px; font-size: 1.1rem;">${script.description[currentLanguage]}</p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-language">${translateText('luaScript')}</span>
+                        <button class="copy-code-btn" onclick="copyScriptCode(${script.id})">
+                            📋 ${translateText('copyCode')}
+                        </button>
+                    </div>
+                    <div class="code-content">${script.code}</div>
+                </div>
+            `;
+            
+            document.getElementById('scriptModal').style.display = 'block';
+        }
+
+        // Fechar modal
+        function closeModal() {
+            document.getElementById('scriptModal').style.display = 'none';
+        }
+
+        // Copiar script
+        function copyScript(id) {
+            const script = scripts.find(s => s.id === id);
+            if (!script) return;
+            
+            navigator.clipboard.writeText(script.code).then(() => {
+                showToast(translateText('scriptCopied'));
+            }).catch(() => {
+                showToast(translateText('copyError'));
+            });
+        }
+
+        // Copiar código do modal
+        function copyScriptCode(id) {
+            const script = scripts.find(s => s.id === id);
+            if (!script) return;
+            
+            navigator.clipboard.writeText(script.code).then(() => {
+                showToast(translateText('codeCopied'));
+            }).catch(() => {
+                showToast(translateText('copyError'));
+            });
+        }
+
+        // Mostrar toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchScripts(e.target.value);
+        });
+
+        document.getElementById('languageSelect').addEventListener('change', (e) => {
+            changeLanguage(e.target.value);
+        });
+
+        // Fechar modal ao clicar fora
+        document.getElementById('scriptModal').addEventListener('click', (e) => {
+            if (e.target.id === 'scriptModal') {
+                closeModal();
+            }
+        });
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Inicializar
+        document.getElementById('languageSelect').value = currentLanguage;
+        createParticles();
+        updatePageLanguage();
+    </script>
+</body>
+</html>
